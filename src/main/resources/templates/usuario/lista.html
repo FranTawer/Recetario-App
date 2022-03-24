@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org" xml:lang xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head th:replace="/plantilla/plantilla::head"></head>
+
+<body>
+<header th:replace="/plantilla/plantilla::header"></header>
+<main>
+    <div class="alert alert-success alert-dismissible fade show" role="alert" th:if="${success != null}">
+        <label th:text="${success}"></label>
+        <button type="button" class="btn-close" data-bs-dismiss="alert"
+                aria-label="Close"></button>
+    </div>
+    <div class="alert alert-danger alert-dismissible fade show" role="alert" th:if="${error != null}">
+        <label th:text="${error}"></label>
+        <button type="button" class="btn-close" data-bs-dismiss="alert"
+                aria-label="Close"></button>
+    </div>
+    <div class="alert alert-warning alert-dismissible fade show" role="alert" th:if="${warning != null}">
+        <label th:text="${warning}"></label>
+        <button type="button" class="btn-close" data-bs-dismiss="alert"
+                aria-label="Close"></button>
+    </div>
+    <div class="container ">
+
+        <div class="d-flex">
+            <div class="bg-card col col-md-6 border border-dark border-2 mt-4 fs-2 rounded-3">
+                <h2 class="text-center py-3 fs-2" th:text="${h1}"></h2>
+            </div>
+            <div class="col col-md-6 mt-4 text-center">
+                <a th:href="@{/usuario/crear}" class="btn btn-lg nueva border border-dark border-2 rounded-3 ms-3"
+                   type="button" target="_blank">Nuevo Usuario</a>
+                <a class="back btn btn-lg border border-dark border-2 rounded-3" onclick="goBack()">Regresar</a>
+            </div>
+        </div>
+
+        <div class="rounded-3">
+            <table class="table text-center border border-dark border-2 mt-4 bg-card rounded-3 table-bordered table-bordered border-dark">
+                <thead>
+                <tr class="text-uppercase ">
+                    <th scope="col">Foto</th>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Apellido</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Rol</th>
+                    <th scope="col">Editar</th>
+                    <th scope="col">Eliminar</th>
+                </tr>
+                </thead>
+
+                <tbody>
+                <tr th:if="${usuario.getBaja() == false}" th:each="usuario:${usuarios}" class="fw-bolder">
+                    <td>
+                        <img class="center lista-img image" th:src="@{'/imagenes/usuario/' + ${usuario.foto}}"
+                             th:alt="${usuario.foto}">
+                    </td>
+                    <td class="text-capitalize" th:text="${usuario.nombre}"></td>
+                    <td class="text-capitalize" th:text="${usuario.apellido}"></td>
+                    <td th:text="${usuario.email}"></td>
+                    <td th:text="${usuario.rol}"></td>
+                    <td><a th:href="@{/usuario/editar/} + ${usuario.id}"
+                           class="btn editar border border-dark border-2 rounded-3">Editar</a></td>
+                    <td><a th:href="@{/usuario/eliminar/} + ${usuario.id}"
+                           class="btn btn-danger  border border-dark border-2 rounded-3">Eliminar</a></td>
+                </tr>
+                </tbody>
+                <p th:if="${usuarios.isEmpty}">No hay usuarios para mostrar</p>
+            </table>
+        </div>
+
+    </div>
+</main>
+<footer th:replace="/plantilla/plantilla::footer"></footer>
+
+</body>
+
+</html>

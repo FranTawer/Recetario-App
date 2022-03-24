@@ -1,0 +1,32 @@
+
+.contenedor{
+    border-color: rgba(#6c757d);
+    border-left: 30px;
+    padding-left: 30px;
+    padding-right: 30px;
+  }
+ 
+  .recuadro{
+    text-align: center;
+    border-color: rgba(#6c757d);
+    margin-top: 20px;
+    margin-left: auto;
+    margin-right: auto;
+    border-left: 10%;
+    border-right: 40%;
+    font-size: x-large;
+    font-style: normal;
+    font-family: Arial;
+    padding: 5%;
+
+  }
+.boton{
+  margin-left: 50%;
+}
+
+  
+
+
+
+
+

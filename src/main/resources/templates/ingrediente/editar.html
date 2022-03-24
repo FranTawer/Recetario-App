@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org" xml:lang xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head th:replace="/plantilla/plantilla::head"></head>
+
+<body>
+<header th:replace="/plantilla/plantilla::header"></header>
+
+<main>
+    <div class="container">
+
+
+        <h1>Página para editar un ingrediente</h1>
+        <div class="card bg-light">
+            <div class="card-header bg-dark text-white" th:text="${h1}"></div>
+            <div class="card-body ">
+
+                <form class="row g-3" th:action="@{/ingrediente/guardar}" th:object="${ingrediente}" method="post">
+                    <input type="hidden" th:field="*{id}">
+                    <div class="form-group row mt-3">
+                        <label for="nombre" class="col-sm-3 col-form-label"> Ingrediente</label>
+                        <div class="col-sm-6">
+                            <input type="text" th:field="*{nombre}" class="form-control" id="nombre"
+                                   placeholder="Ingrese ingrediente" required>
+                        </div>
+                    </div>
+                    <div class="form-group row mt-3">
+                        <label for="cantidad" class="col-sm-3 col-form-label"> Cantidad</label>
+                        <div class="col-sm-6">
+                            <input type="text" th:field="*{cantidad}" class="form-control" id="cantidad"
+                                   placeholder="Ingrese cantidad" required>
+                        </div>
+                    </div>
+
+                    <div class="card-footer text-center">
+                        <button type="submit" class="btn btn-primary"> Guardar</button>
+                        <a class="btn btn-success" onclick="goBack()" th:href="@{/ingrediente/}"/>Regresar</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</main>
+<footer th:replace="/plantilla/plantilla::footer"></footer>
+
+</body>
+
+</html>

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html xml:lang xmlns:th="https://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head th:replace="/plantilla/plantilla::head"></head>
+
+<body>
+    <main>
+        <div class="d-flex">
+            <div class="col col-md-5 py-3 bg-card">
+                <img src="/imagenes/landing/logo.png" alt="Logo RecetApp" class="img-fluid px-2 ">
+            </div>
+
+            <div class="col col-md-7">
+                <div class="card-body col col-md-12">
+                    <div class="text-center bg-card rounded-3 border border-warning border-3">
+<!--                        <h2 class="fs-1">Bienvenido<p><span sec:authentication="name"></span></p></h2>-->
+                        <h2 class="fs-1">Bienvenido<p><span th:text="${nombreUsuario}"></span></p></h2>
+                    </div>
+                </div>
+
+                <div class="col col-md-12 text-center ps-5">
+
+                    <div class="card bg-card border border-warning border-3 ms-5 mb-2 align-items-center " style="max-width: 400px;">
+                        <div class="row g-0">
+                            <div class="col-md-4">
+                                <img src="/imagenes/landing/user.svg" class="rounded mx-auto d-block"  style="width:8rem;" alt="user-image">
+                                <h5 class="card-title text-center">Usuario</h5>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="card-body text-start">
+<!--                                    <a th:href="@{/usuario/}" class="btn btn-outline-warning border border-dark text-black border-2 fw-bold mb-2">Perfil</a>-->
+                                    <a th:href="@{/usuario/}" class="btn btn-outline-warning border border-dark text-black border-2 fw-bold mb-2">Lista de Usuarios</a>
+                                    <a th:href="@{/usuario/crear}" class="btn btn-outline-warning border border-dark text-black border-2 fw-bold mb-2">Nuevo Usuario</a>
+                                    <form th:action="@{/logout}" method="post">
+                                        <button type="submit" class="btn btn-outline-warning border border-dark text-black border-2 fw-bold ">Log Out</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card bg-card border border-warning border-3 ms-5 mb-2 align-items-center " style="max-width: 400px;">
+                        <div class="row g-0">
+                            <div class="col-md-4">
+                                <img src="/imagenes/landing/receta.svg" class="" alt="Recetas" style="width:8rem;">
+                                <h5 class="card-title text-center">Recetas</h5>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="card-body text-start">
+                                    <a th:href="@{/receta/}" class="btn btn-outline-warning border border-dark text-black border-2 fw-bold mb-2">Lista de recetas</a>
+                                    <a th:href="@{/receta/crear}"class="btn btn-outline-warning border border-dark text-black border-2 fw-bold mb-2">Nueva receta</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card bg-card border border-warning border-3 ms-5 align-items-center " style="max-width: 400px;">
+                        <div class="row g-0">
+                            <div class="col-md-4">
+                                <img src="/imagenes/landing/carta.svg" class="rounded mx-auto d-block" alt="Carta" style="width:7rem;">
+                                <h5 class="card-title text-center">Menú</h5>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="card-body text-start">
+                                    <a th:href="@{/carta/}" class="btn btn-outline-warning border border-dark text-black border-2 fw-bold mb-2">Lista de Menús</a>
+                                    <a th:href="@{/carta/crear}"class="btn btn-outline-warning border border-dark text-black border-2 fw-bold mb-2">Nuevo menú</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </main>
+
+</body>
+
+</html>

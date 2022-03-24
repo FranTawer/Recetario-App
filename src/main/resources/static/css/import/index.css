@@ -1,0 +1,11 @@
+.fondo-imagen {
+  background-image: url(/imagenes/landing/finfex.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 100vh;
+}
+.formulario{
+  height: 99.5vh;
+  width: 100%;
+}
+

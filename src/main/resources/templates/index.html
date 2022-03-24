@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+
+<html xml:lang xmlns:th="https://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head th:replace="/plantilla/plantilla::head"></head>
+
+<body class="fondo-imagen ">
+
+<main>
+    <div class="alert alert-success alert-dismissible fade show" role="alert" th:if="${success != null}">
+        <label th:text="${success}"></label>
+        <button type="button" class="btn-close" data-bs-dismiss="alert"
+                aria-label="Close"></button>
+    </div>
+    <div class="alert alert-danger alert-dismissible fade show" role="alert" th:if="${error != null}">
+        <label th:text="${error}"></label>
+        <button type="button" class="btn-close" data-bs-dismiss="alert"
+                aria-label="Close"></button>
+    </div>
+    <div class="alert alert-warning alert-dismissible fade show" role="alert" th:if="${warning != null}">
+        <label th:text="${warning}"></label>
+        <button type="button" class="btn-close" data-bs-dismiss="alert"
+                aria-label="Close"></button>
+    </div>
+    <div class="alert alert-info alert-dismissible fade show" role="alert" th:if="${info != null}">
+        <label th:text="nfo${i}"></label>
+        <button type="button" class="btn-close" data-bs-dismiss="alert"
+                aria-label="Close"></button>
+    </div>
+    <form class="formulario row align-content-center justify-content-center text-center" th:action="@{/logincheck}"
+          method="post">
+        <div class="col-12 col-md-6 col-sm-12 ">
+            <h1 class="text-uppercase fs-1 fw-bolder text-decoration-none  my-3">Iniciar Sesion</h1>
+        </div>
+        <div class="espacios d-flex justify-content-center">
+            <div class=" col-md-6 col-sm-6 col-xl-4">
+                <div class="my-3 border border-dark border-2 rounded-3">
+                    <input autocomplete="off" type="email" class="form-control" id="email" name="email"
+                           placeholder="Email">
+                </div>
+                <div class="border border-dark border-2 rounded-3 ">
+                    <input type="password" class="form-control" id="pass" name="password"
+                           placeholder="Enter your password">
+                </div>
+                <div class="pt-4">
+                    <button type="submit" class="btn btn-lg btn-info border border-dark">Iniciar Sesion</button>
+<!--                      <a th:href="@{/usuario/crear}" class="btn btn-lg btn-info border border-dark">Crear Usuario</a>-->
+                </div>
+
+            </div>
+        </div>
+    </form>
+</main>
+</body>
+
+</html>

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org" xml:lang xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head th:replace="/plantilla/plantilla::head"></head>
+
+<body>
+  <header th:replace="/plantilla/plantilla::header"></header>
+  <main>
+
+    <div class="container">
+      <div class="alert alert-success alert-dismissible fade show" role="alert" th:if="${success != null}">
+        <label th:text="${success}"></label>
+        <button type="button" class="btn-close" data-bs-dismiss="alert"
+                aria-label="Close"></button>
+    </div>
+    <div class="alert alert-danger alert-dismissible fade show" role="alert" th:if="${error != null}">
+        <label th:text="${error}"></label>
+        <button type="button" class="btn-close" data-bs-dismiss="alert"
+                aria-label="Close"></button>
+    </div>
+    <div class="alert alert-warning alert-dismissible fade show" role="alert" th:if="${warning != null}">
+        <label th:text="${warning}"></label>
+        <button type="button" class="btn-close" data-bs-dismiss="alert"
+                aria-label="Close"></button>
+    </div>
+      <div class="">
+        <div class="bg-card col col-md-6 border border-dark border-2 mt-4 fs-2 rounded-3">
+          <h2 class="text-center py-3 fs-2" th:text="${h1}"></h2>
+        </div>
+      </div>
+
+      <div class="">
+        <table class="table text-center border border-dark border-2 mt-4 bg-card rounded-3 table-bordered table-bordered border-dark">
+          <thead>
+            <tr >
+              <th scope="col">Detalle</th>
+              <th scope="col">Foto</th>
+              <th scope="col">Nombre</th>
+              <th scope="col">Categoria</th>
+              <th scope="col">Coccion (min)</th>
+              <th scope="col">Preparacion (min)</th>
+              <th scope="col">Tiempo Total</th>
+              <th scope="col">Porciones</th>
+              <th scope="col">Editar</th>
+              <th scope="col">Eliminar</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr th:each="receta:${recetas}" class="fw-bolder text-capitalize">
+              <td><a th:href="@{/receta/detalle/} + ${receta.id}" class="btn btn-sm mostrar border border-dark border-2 rounded-3">Ver</a></td>
+              <td><img class="center lista-img" th:src="@{'/imagenes/receta/' + ${receta.foto}}"
+                  th:alt="${receta.foto}"></td>
+              <td th:text="${receta.nombre}"></td>
+              <td th:text="${receta.categoria}"></td>
+              <td th:text="${receta.tiempoDeCoccion}"></td>
+              <td th:text="${receta.tiempoDePreparacion}"></td>
+              <td th:text="${receta.tiempoTotal}"></td>
+              <td th:text="${receta.porcion}"></td>
+              <td><a th:href="@{/receta/editar/} + ${receta.id}" class="btn mostrar editar border-dark border-2 rounded-3">Editar</a></td>
+              <td><a th:href="@{/receta/eliminar/} + ${receta.id}" class="btn btn-danger  border border-dark border-2 rounded-3">Eliminar</a></td>
+            </tr>
+          </tbody>
+
+
+        </table>
+        <!-- <a class="btn btn-success" onclick="goBack()" th:href="@{/inicio/}" value="Regresar">Regresar</a> -->
+      </div>
+    </div>
+  </main>
+  <footer th:replace="/plantilla/plantilla::footer"></footer>
+
+</body>
+
+</html>

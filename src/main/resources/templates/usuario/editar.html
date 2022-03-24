@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org" xml:lang xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head th:replace="/plantilla/plantilla::head"></head>
+
+<body>
+<header th:replace="/plantilla/plantilla::header"></header>
+
+<main>
+    <div class="container">
+        <div class="d-flex">
+            <div class="bg-card col col-md-6 border border-dark border-2 mt-4 fs-2 rounded-3">
+                <h2 class="text-center py-3 fs-2" th:text="${h1}"></h2>
+            </div>
+        </div>
+
+        <form th:action="@{/usuario/guardar}" th:object="${usuario}" method="post" enctype="multipart/form-data"
+              class=" text-center border border-dark border-2 my-4 bg-card rounded-3 ">
+            <input type="hidden" th:field="*{id}">
+            <input type="hidden" th:field="*{password}">
+            <input hidden type="date" th:field="*{alta}">
+            <!--                <input type="hidden" th:value="*{password}" name="password2">-->
+            <input type="hidden" th:field="*{baja}">
+            <input type="hidden" th:field="*{foto}">
+
+            <div>
+                <img th:if="${usuario.foto != null}" class="rounded-pill pt-4"
+                     th:src="@{'/imagenes/usuario/' + ${usuario.foto}}"
+                     th:alt="${usuario.foto}" style="max-width:18rem;">
+                <img th:if="${usuario.foto == null}" class="rounded-pill pt-4"
+                     th:src="@{'/imagenes/usuario/intruso.jpg'}"
+                     th:alt="${usuario.foto}" style="max-width:18rem;">
+
+            </div>
+            <div class="fw-bolder text-start ms-5">
+
+                <div class="form-group row mt-3">
+                    <label for="nombre" class="col-sm-3 col-form-label "> Nombre</label>
+                    <div class="col-sm-6">
+                        <input type="text" th:field="*{nombre}" class="form-control" id="nombre"
+                               placeholder="Ingrese nombre" required>
+                    </div>
+                </div>
+
+                <div class="form-group row mt-3">
+                    <label for="apellido" class="col-sm-3 col-form-label"> Apellido</label>
+                    <div class="col-sm-6">
+                        <input type="text" th:field="*{apellido}" class="form-control" id="apellido"
+                               placeholder="Ingrese apellido" required>
+                    </div>
+                </div>
+
+                <div class="form-group row mt-3">
+                    <label for="email" class="col-sm-3 col-form-label"> Email</label>
+                    <div class="col-sm-6">
+                        <input type="email" th:field="*{email}" class="form-control" id="email"
+                               placeholder="Ingrese email" required>
+                    </div>
+                </div>
+
+                <div class="form-group row mt-3">
+                    <label for="email" class="col-sm-3 col-form-label"> Asignar Rol</label>
+                    <div class="col-sm-6">
+                        <select th:field="*{rol}">
+                            <option th:each="rol : ${roles}" th:value="${rol}" th:text="${rol.toString()}">
+                            </option>
+                        </select>
+
+                    </div>
+                </div>
+
+                <div class="form-group row mt-3">
+                    <label for="file" class="col-sm-3 col-form-label">Cambiar Foto</label>
+                    <div class="col-sm-6">
+                        <input type="file" class="form-control" id="file" name="file">
+                    </div>
+                </div>
+
+                <div class="my-3 text-center">
+                    <button class="btn nueva btn-lg border border-dark border-2 rounded-3" type="submit">Guardar
+                        Cambios
+                    </button>
+                    <a th:href="@{/usuario/pass/} + *{id}"
+                       class="editar btn btn-lg border border-dark border-2 rounded-3">Editar Clave</a>
+                    <a class="back btn btn-lg border border-dark border-2 rounded-3" onclick="goBack()">Regresar</a>
+                </div>
+            </div>
+        </form>
+
+    </div>
+
+</main>
+
+<footer th:replace="/plantilla/plantilla::footer"></footer>
+
+</body>
+
+</html>

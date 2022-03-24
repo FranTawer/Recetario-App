@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org" xml:lang xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head th:replace="/plantilla/plantilla::head"></head>
+
+<body>
+<header th:replace="/plantilla/plantilla::header"></header>
+<main>
+    <div class="alert alert-success alert-dismissible fade show" role="alert" th:if="${success != null}">
+        <label th:text="${success}"></label>
+        <button type="button" class="btn-close" data-bs-dismiss="alert"
+                aria-label="Close"></button>
+    </div>
+    <div class="alert alert-danger alert-dismissible fade show" role="alert" th:if="${error != null}">
+        <label th:text="${error}"></label>
+        <button type="button" class="btn-close" data-bs-dismiss="alert"
+                aria-label="Close"></button>
+    </div>
+    <div class="alert alert-warning alert-dismissible fade show" role="alert" th:if="${warning != null}">
+        <label th:text="${warning}"></label>
+        <button type="button" class="btn-close" data-bs-dismiss="alert"
+                aria-label="Close"></button>
+    </div>
+    <div class="container">
+
+
+        <div class="d-flex">
+            <div class="bg-card col col-md-6 border border-dark border-2 mt-4 fs-2 rounded-3">
+                <h2 class="text-center py-3 fs-2" th:text="${h1}"></h2>
+            </div>
+        </div>
+
+        <form th:action="@{/usuario/update-pass}" th:object="${usuario}" method="post" enctype="multipart/form-data"
+              class=" text-center border border-dark border-2 my-4 bg-card rounded-3 ">
+            <input type="hidden" th:field="*{id}">
+            <input type="hidden" th:field="*{nombre}">
+            <input type="hidden" th:field="*{apellido}">
+            <input type="hidden" th:field="*{email}">
+            <input type="hidden" th:field="*{baja}">
+            <input type="hidden" th:field="*{rol}">
+            <input hidden type="date" th:field="*{alta}">
+            <input hidden type="file" th:name="file" th:value="*{foto}">
+            <div class="fw-bolder text-start ms-5 row mt-4">
+                <label for="Contraseña" class="col-sm-2 col-form-label ">Contraseña</label>
+                <div class="col-sm-4">
+                    <input type="password" class="form-control form-control-sm" th:field="*{password}" id="Contraseña"
+                           placeholder="Ingrese Contraseña">
+                </div>
+            </div>
+            <div class="fw-bolder text-start ms-5 row">
+                <label for="Contraseña2" class="col-sm-2 col-form-label ">Repetir Contraseña</label>
+                <div class="col-sm-4">
+                    <input type="password" class="form-control form-control-sm" id="Contraseña2"
+                           placeholder="Repita Contraseña" name="password2" minlength="4">
+                </div>
+                <div class="my-3 text-center">
+                    <button class="btn nueva border border-dark border-2 rounded-3" type="submit">Guardar Cambios
+                    </button>
+                    <a class="back btn  border border-dark border-2 rounded-3" onclick="goBack()">Regresar</a>
+                </div>
+            </div>
+        </form>
+    </div>
+</main>
+<footer th:replace="/plantilla/plantilla::footer"></footer>
+</body>
+</html>

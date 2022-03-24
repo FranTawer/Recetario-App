@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org" xml:lang xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head th:replace="/plantilla/plantilla::head"></head>
+
+<body>
+    <header th:replace="/plantilla/plantilla::header"></header>
+
+    <main>
+
+        <div class="container">
+
+            <div class="d-flex">
+                <div class="bg-card col col-md-6 border border-dark border-2 mt-4 fs-2 rounded-3">
+                    <h2 class="text-center py-3 fs-2" th:text="${h1}"></h2>
+                </div>
+            </div>
+
+            <div class="card border border-dark border-2 mt-4 bg-card rounded-3 mb-5">
+                <div class="card-body">
+                    <form class="row align-items-center px-3" th:action="@{/receta/guardar}" th:object="${receta}"
+                        method="POST" enctype="multipart/form-data">
+
+                        <div class="col-sm-6">
+                            <label for="nombre" class="fas fa-regular fa-file-signature form-label"> Nombre de la Receta</label>
+                            <input th:field="*{nombre}" type="text" class="form-control capital" id="nombre" required>
+                        </div>
+                        <div class="col-sm-2">
+                            <label for="Tcocion" class="fas fa-solid fa-clock form-label"> Cocción (min)</label>
+                            <input th:field="*{tiempoDeCoccion}" type="number" class="form-control " id="Tcocion"min="0">
+                        </div>
+                        <div class="col-sm-2">
+                            <label for="prep" class="fas fa-solid fa-clock form-label"> Preparación (min)</label>
+                            <input th:field="*{tiempoDePreparacion}" type="number" class="form-control" id="prep" min="0">
+                        </div>
+                        <div class="col-sm-4">
+                            <label for="file" class="fas fa-regular fa-camera form-label"> Imagen</label>
+                            <input type="file" class="form-control" id="file" name="file" required>
+                        </div>
+                        <div class="col-sm-2">
+                            <label for="specificSizeInputName" class="fas fa-solid fa-users form-label">Porciones</label>
+                            <input th:field="*{porcion}" type="number" class="form-control" id="specificSizeInputName" min="0">
+                        </div>
+                        <div class="col-sm-2">
+                            <label for="specificSizeInputName" class="fas fa-solid fa-users form-label">Categoria</label>
+                            <select th:field="*{categoria}" class="form-control">
+                                <option th:each="categoria : ${listaCategorias}" th:value="${categoria}" th:text="${categoria.toString}">
+                                </option>
+                            </select>
+                        </div>
+                        <!--                FORMULARIO INGREDIENTES -->
+                        <div class="">
+                            <table class="table border border-dark border-2 mt-3 bg-card table-bordered table-bordered ">
+                                <thead class="text-center">
+                                    <tr >
+                                        <th scope="col">Nombre del ingrediente</th>
+                                        <th scope="col">Cantidad</th>
+                                        <th scope="col">Agregar</th>
+                                        <th scope="col">Eliminar</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr th:id="'ingrediente' + ${index.index}"
+                                        th:classappend="${index.index != 0} ? 'no-mostrar'"
+                                        th:each="ingrediente,index : *{ingredientes}">
+                                        <td>
+                                            <label for="nombre">Nombre</label>
+                                            <input class=" text-capitalize" placeholder="Ingrese Ingrediente" type="text"
+                                                th:field="*{ingredientes[__${index.index}__].nombre}"
+                                                th:id="'nombre'+${index.index}">
+                                        </td>
+                                        <td>
+                                            <label for="nombre">Cantidad</label>
+                                            <input class=" text-capitalize" placeholder="Ingrese Cantidad" type="text"
+                                                th:field="*{ingredientes[__${index.index}__].cantidad}"
+                                                th:id="'cantidad'+${index.index}">
+                                        </td>
+                                        <td>
+                                            <button th:id="'botonAI'+${index.index}" type="button"class="btn nueva border border-dark border-2 rounded-3" th:attr="onclick=|agregar('ingrediente',${index.index})|">Agregar
+                                            </button>
+                                        </td>
+                                        <td>
+                                            <button th:id="'botonEI'+${index.index}" type="button" class="btn btn-danger border border-dark border-2 rounded-3"th:attr="onclick=|eliminar('ingrediente',${index.index})|">Eliminar
+                                            </button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <!--                FORMULARIO PROCEDIMIENTOS-->
+                        <div class="">
+                            <table class="table border border-dark border-2 mt-3 bg-card table-bordered table-bordered text-center">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Paso</th>
+                                        <th scope="col">Procedimiento</th>
+                                        <th scope="col">Agregar</th>
+                                        <th scope="col">Eliminar</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr th:id="'paso'+${index.index}"
+                                        th:classappend="${index.index != 0} ? 'no-mostrar'"
+                                        th:each="paso,index : *{pasos}">
+                                        <td>
+                                            <p th:text="'Paso ' + ${index.count}"></p>
+                                        </td>
+                                        <td>
+                                            <div class="form-floating">
+                                                <textarea th:field="*{pasos[__${index.index}__].paso}" class="form-control" placeholder="Descripcion"th:id="'procedimiento'+${index.index}"></textarea>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <button th:id="'botonAP'+${index.index}" type="button" class="btn nueva border border-dark border-2 rounded-3" th:attr="onclick=|agregar('paso',${index.index})|">Agregar
+                                            </button>
+                                        </td>
+
+                                        <td>
+                                            <button th:id="'botonEP'+${index.index}" type="button" class="btn btn-danger border border-dark border-2 rounded-3"th:attr="onclick=|eliminar('paso',${index.index})|">Eliminar
+                                            </button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <div class=" col col-6 mb-3 fs-2">
+                            <button class="btn crear btn-lg border border-dark border-2 rounded-3" type="submit">Crear receta</button>
+                            <a class="back btn btn-lg border border-dark border-2 rounded-3"onclick="goBack()">Regresar</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    </main>
+    <footer th:replace="/plantilla/plantilla::footer"></footer>
+</body>
+
+</html>

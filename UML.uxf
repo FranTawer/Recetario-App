@@ -1,0 +1,46 @@
+<diagram program="umletino" version="14.4.0-SNAPSHOT"><zoom_level>10</zoom_level><element><id>UMLClass</id><coordinates><x>320</x><y>40</y><w>140</w><h>230</h></coordinates><panel_attributes>Usuario
+Package::Entidad
+--
+-id: Int
+-String:nombre
+-Enum: Rol
+-String: password
+-String: Username
+-Email: correo
+-Foto foto
+--
+Getter 
+Setter
+Hascode
+--</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>50</x><y>20</y><w>200</w><h>310</h></coordinates><panel_attributes>Recetas
+Package::Entidades
+--
+-id: int 
+-String: nombre
+-List String&lt;Ingredientes&gt;
+-List String&lt;Procedimientos&gt;
+-Foto foto
+-String: tiempo de coccion
+-String: tiempo de preparacion
+-String: tiempo total
+-String: porcion
+-List&lt;Comentario&gt;
+-Int: calificación.
+-List&lt;Categoria&gt;
+
+--
+Getter 
+Setter
+Hascode
+--</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>620</x><y>20</y><w>210</w><h>140</h></coordinates><panel_attributes>Foto
+
+--
+-id: Long
+_-ClassAttribute: Long_
+--
+#Operation(i: int): int
+/+AbstractOperation()/
+--
+Responsibilities
+-- Resp1
+*-- Resp2*</panel_attributes><additional_attributes></additional_attributes></element></diagram>

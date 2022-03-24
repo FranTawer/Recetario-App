@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org" xml:lang xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head th:replace="/plantilla/plantilla::head"></head>
+
+<body>
+  <header th:replace="/plantilla/plantilla::header"></header>
+  <main>
+    <!-- Converti la tabla a cards se deben ver todas las recetas en cartas separadas agregar boton bussqueda por tipo/categoria/otros.  -->
+
+    <div class="container mb-4">
+      <div class="d-flex">
+        <div class="bg-card col col-md-6 border border-dark border-2 mt-4 fs-2 rounded-3">
+          <h2 class="text-center py-3 fs-2" th:text="${h1}"></h2>
+        </div>
+        <div class="col col-md-6 mt-4 text-center">
+
+          <a th:href="@{/receta/crear}" class="btn btn-lg nueva border border-dark border-2 rounded-3 ms-3"
+            type="button" target="_blank">Nueva Receta</a>
+
+        </div>
+      </div>
+
+      <div class="card-group mt-4">
+        <div class="card border border-dark border-2 mt-4 fs-2 rounded-3 mx-2 card bg-card" th:each="receta:${recetas}">
+          <img class="card-img-top border img-thumbnail bg-card" style="height:10rem;"
+            th:src="@{'/imagenes/receta/' + ${receta.foto}}" th:alt="${receta.foto}">
+          <div class="card-body">
+            <h4 class="card-title" th:text="${receta.nombre}"></h4>
+            <a class="btn mostrar border border-dark border-2 rounded-3"
+              th:href="@{/receta/detalle/} + ${receta.id}">Detalle</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </main>
+  <footer th:replace="/plantilla/plantilla::footer"></footer>
+
+</body>
+
+</html>

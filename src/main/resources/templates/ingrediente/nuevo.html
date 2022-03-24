@@ -1,0 +1,46 @@
+<!-- <!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org" xml:lang xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head th:replace="/plantilla/plantilla::head"></head>
+
+<body>
+  <header th:replace="/plantilla/plantilla::header"></header>
+
+  <main >
+    <div class="container">
+
+    
+    <div class="card bg-light">
+      <div class="card-header bg-dark text-white" th:text="${h1}"></div>
+      <div class="card-body ">
+
+        <form class="row g-3" th:action="@{/ingrediente/guardar}" th:object="${ingrediente}" method="post">
+
+          <div class="form-group row mt-3">
+            <label for="nombre" class="col-sm-3 col-form-label"> Ingrediente</label>
+            <div class="col-sm-6">
+              <input type="text" th:field="*{nombre}" class="form-control" id="nombre"placeholder="Nombre del Ingrediente" required>
+            </div>
+          </div>
+          <div class="form-group row mt-3">
+            <label for="nombre" class="col-sm-3 col-form-label"> Cantidad</label>
+            <div class="col-sm-6">
+              <input type="text" th:field="*{cantidad}" class="form-control" id="cantidad" placeholder="Indique la cantidad" required>
+            </div>
+          </div>
+          <div class="card-footer text-center">
+            <input type="submit" class="btn btn-primary" value="Guardar" />
+            <input class="btn btn-success" onclick="goBack()" value="Regresar" />
+          </div>
+        </form>
+      </div>
+    </div>
+    </div>
+    
+  </main>
+
+  <footer th:replace="/plantilla/plantilla::footer"></footer>
+
+</body>
+
+</html> -->

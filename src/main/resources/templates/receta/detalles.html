@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org" xml:lang xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head th:replace="/plantilla/plantilla::head"></head>
+</head>
+
+<body>
+<header th:replace="/plantilla/plantilla::header"></header>
+
+<main>
+    <div class="container">
+
+        <div class="d-flex">
+            <div class="bg-card col col-md-6 border border-dark border-2 mt-4 fs-2 rounded-3">
+                <h2 class="text-center py-3 fs-2" th:text="${h1}"></h2>
+            </div>
+            <div class="col col-md-6 mt-4 text-center">
+                <a th:href="@{/receta/crear}" class="btn btn-lg nueva border border-dark border-2 rounded-3 ms-3"
+                   type="button" target="_blank">Nueva Receta</a>
+                <a class="back btn btn-lg border border-dark border-2 rounded-3" onclick="goBack()">Regresar</a>
+            </div>
+        </div>
+
+        <div class="card border border-dark border-2 my-4 bg-card rounded-3 justify-content-center align-items-center ">
+
+            <div class="form-group d-flex col col-sm-12">
+
+                <div class="card col col-sm-6 border border-dark border-2 rounded-3 bg-card mx-5 my-5"
+                     style="width: 18rem;">
+                    <img th:src="@{'/imagenes/receta/' + ${receta.foto}}" class="card-img-top img-thumbnail bg-card"
+                         th:alt="${receta.foto}">
+                    <div class="card-body bg-card">
+                        <h5 class="card-title  text-capitalize" th:text="${receta.nombre}"></h5>
+                    </div>
+                    <ul class="list-group list-group-flush bg-card">
+                        <li class="list-group-item fas fa-solid fa-clock fa-1x bg-card"
+                            th:text="' Tiempo de preparacion : ' + ${receta.tiempoDeCoccion}"></li>
+                        <li class="list-group-item fas fa-solid  fa-clock fa-1x bg-card"
+                            th:text="' Tiempo de preparacion : ' + ${receta.tiempoDePreparacion}"></li>
+                        <li class="list-group-item fas fa-solid fa-clock fa-1x bg-card"
+                            th:text="' Total : ' + ${receta.tiempoTotal}"></li>
+                        <li class="list-group-item fas fa-solid fa-utensils fa-1x bg-card"
+                            th:text="' Porciones : ' + ${receta.porcion}"></li>
+                    </ul>
+                </div>
+
+                <div class="col col-sm-6 ">
+                    <ul class="list-group list-group-flush mb-4 ">
+                        <h3 class="text-center mt-5">Lista de ingredientes</h3>
+                        <li th:if="${ingrediente.nombre} != null" th:each="ingrediente : ${ingredientes}"
+                            th:text=" ${ingrediente.cantidad}+ ' '+ ${ingrediente.nombre}"
+                            class="list-group-item bg-card border border-dark rounded-3 mb-1  text-capitalize fw-bolder">
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="col col-sm-12 mb-3">
+                <div class="border border-dark border-2 my-4 bg-card rounded-3 mx-5">
+                    <ul class="nav nav-tabs" id="myTab" role="tablist">
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link active fw-bolder border border-dark" id="home-tab"
+                                    data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab"
+                                    aria-controls="home" aria-selected="true">Procemiento
+                            </button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link fw-bolder border border-dark" id="profile-tab"
+                                    data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab"
+                                    aria-controls="profile" aria-selected="false">Comentario
+                            </button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link fw-bolder border border-dark" id="contact-tab"
+                                    data-bs-toggle="tab" data-bs-target="#contact" type="button" role="tab"
+                                    aria-controls="contact" aria-selected="false">Opiniones
+                            </button>
+                        </li>
+                    </ul>
+
+                    <div class="tab-content border border-2" id="myTabContent">
+
+                        <div class="tab-pane fade show active mx-4 px-4 my-4 py-4" id="home" role="tabpanel"
+                             aria-labelledby="Procedimiento">
+                            <ol class="list-group list-group-numbered">
+                                <li th:if="${paso.paso} != null" th:each="paso : ${pasos}" th:text="${paso.paso}"
+                                    class="list-group-item bg-card border border-dark mb-1  text-capitalize"></li>
+                            </ol>
+                        </div>
+
+                        <div class="tab-pane mx-5 my-5" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+
+                            <form th:action="@{/receta/comentario/}" method="POST">
+                                <input hidden th:value="${receta.id}" th:name="id"></input>
+                                <div class="mb-3">
+                                    <label for="nombre" class="form-label fw-bolder">Nombre de Usuario : </label>
+                                    <span  th:text="${nombreUsuario}" id="nombre"></span>
+                                </div>
+                                <div class="mb-3 ">
+                                    <label for="exampleFormControlTextarea1"
+                                           class="form-label fw-bolder">Comentario: </label>
+                                    <textarea class="form-control border border-dark col col-sm-3 "
+                                              id="exampleFormCo" th:name="comentario" required></textarea>
+                                </div>
+                                <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                                    <button class="btn btn-lg nueva border border-dark border-2 rounded-3 ms-3"
+                                            type="submit" onclick="mensaje()">Enviar
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="tab-pane fade  mx-5" id="contact" role="tabpanel" aria-labelledby="contact-tab">
+                            <div class="row">
+                                <div class="col-sm-12 my-3">
+                                    <div class="comentarios border my-4 rounded-3 mx-5">
+                                        <div th:each="comentario : ${comentarios}"
+                                             class="border border-dark border-2 mb-2 rounded-3">
+                                            <h5 class="card-title ps-3 pt-3">Usuario : <span th:text="${comentario.usuario.nombre}"></span></h5>
+                                            <p  class="ps-3 pt-3" th:text="${comentario.cuerpo}"></p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</main>
+
+<footer th:replace="/plantilla/plantilla::footer"></footer>
+
+</body>
+
+</html>
